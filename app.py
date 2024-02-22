@@ -1,6 +1,7 @@
 from flask import Flask, request, abort
+from functools import wraps
 
-app = Flask(__name__)
+
 
 def get_token_auth_header():
     if 'Authorization' not in request.headers:
@@ -16,10 +17,22 @@ def get_token_auth_header():
 
     return header_parts[1]
 
-@app.route('/headers')
-def headers():
+def requires_auth(f):
+    @wraps(f)
+
+    def wrapper(*args, **kwargs):
+
+        jwt = get_token_auth_header()
+        return f( jwt,*args, **kwargs)
     
-    jwt = get_token_auth_header()
+    return wrapper
+
+        
+app = Flask(__name__)
+
+@app.route('/images')
+@requires_auth
+def images(jwt):
 
     print(jwt)
     return 'not implemented'
