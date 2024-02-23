@@ -7,7 +7,7 @@ from urllib.request import urlopen
 
 app = Flask(__name__)
 
-AUTH0_DOMAIN = 'fsndjk.auth0.com'
+AUTH0_DOMAIN = 'fsndjk.us.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'image'
 
@@ -108,10 +108,13 @@ def verify_decode_jwt(token):
 def requires_auth(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
+        
         token = get_token_auth_header()
         try:
             payload = verify_decode_jwt(token)
-        except:
+            
+        except Exception as e:
+            print(e)
             abort(401)
         return f(payload, *args, **kwargs)
 
@@ -122,3 +125,9 @@ def requires_auth(f):
 def headers(payload):
     print(payload)
     return 'Access Granted'
+
+@app.route('/images')
+@requires_auth
+def images(jwt):
+    print(jwt)
+    return 'not implemented'
