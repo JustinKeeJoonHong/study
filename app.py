@@ -133,7 +133,7 @@ def requires_auth(permission=''):
 
 
 @app.route('/images')
-@requires_auth('get:image')
+@requires_auth('get:images')
 def images(jwt):
     print(jwt)
-    return 'not implemented'
+    return 'Success'
