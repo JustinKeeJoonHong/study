@@ -1,11 +1,4 @@
-function todos(state = [], action) {
-  if (action.type === "ADD_TODO") {
-    return state.concat([action.todo]);
-  }
-
-  return state;
-}
-
+// Library Code
 function createStore() {
   let state;
   let listeners = [];
@@ -29,4 +22,13 @@ function createStore() {
     subsribe,
     dispatch,
   };
+}
+
+// App Code
+function todos(state = [], action) {
+  if (action.type === "ADD_TODO") {
+    return state.concat([action.todo]);
+  }
+
+  return state;
 }
