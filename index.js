@@ -1,5 +1,5 @@
 // Library Code
-function createStore() {
+function createStore(reducer) {
   let state;
   let listeners = [];
 
@@ -13,7 +13,7 @@ function createStore() {
   };
 
   const dispatch = (action) => {
-    state = todos(state, action);
+    state = reducer(state, action);
     listeners.forEach((listener) => listener());
   };
 
@@ -32,3 +32,5 @@ function todos(state = [], action) {
 
   return state;
 }
+
+const store = createStore(todos);
