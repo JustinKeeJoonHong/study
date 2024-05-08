@@ -114,3 +114,11 @@ store.dispatch({
     complete: false,
   },
 });
+
+store.dispatch(
+  addTodoAction({
+    id: 0,
+    name: "walk the dog",
+    complete: false,
+  })
+);
