@@ -170,11 +170,15 @@
 
         store.dispatch(
           addGoalAction({
-            id: generateId,
+            id: generateId(),
             name,
           })
         );
       }
+
+      document.getElementById("todoBtn").addEventListener("click", addTodo);
+
+      document.getElementById("goalBtn").addEventListener("click", addGoal);
     </script>
   </body>
 </html>
