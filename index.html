@@ -138,23 +138,6 @@
         todos.forEach(addTodoToDOM);
       });
 
-      // store.dispatch({
-      //     type: ADD_TODO,
-      //     todo: {
-      //       id: 0,
-      //       name: "Learn Redux",
-      //       complete: false,
-      //     },
-      //   });
-
-      //   store.dispatch(
-      //     addTodoAction({
-      //       id: 0,
-      //       name: "walk the dog",
-      //       complete: false,
-      //     })
-      // );
-
       // DOM code
       function addTodo() {
         const input = document.getElementById("todo");
@@ -215,7 +198,13 @@
       function addGoalToDOM(goal) {
         const node = document.createElement("li");
         const text = document.createTextNode(goal.name);
+
+        const removeBtn = createRemoveButton(() => {
+          store.dispatch(removeGoalAction(goal.id));
+        });
+
         node.appendChild(text);
+        node.appendChild(removeBtn);
 
         document.getElementById("goals").appendChild(node);
       }
