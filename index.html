@@ -20,7 +20,9 @@
       <button id="goalBtn">Add Goal</button>
       <ul id="goals"></ul>
     </div>
-    <div></div>
+
+    <hr />
+    <div id="app"></div>
     <script type="text/javascript">
       function generateId() {
         return (
@@ -264,6 +266,32 @@
 
         document.getElementById("goals").appendChild(node);
       }
+    </script>
+
+    <script type="text/babel">
+      const List = (props) => {
+        return (
+          <ul>
+            <li>List</li>
+          </ul>
+        );
+      };
+      const Todos = () => {
+        return (
+          <div>
+            TODOS
+            <List />
+          </div>
+        );
+      };
+      const Goals = () => {
+        return (
+          <div>
+            Goals
+            <List />
+          </div>
+        );
+      };
     </script>
   </body>
 </html>
