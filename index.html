@@ -178,7 +178,7 @@
           todos,
           goals,
         }),
-        Redux.applyMiddleware(checker)
+        Redux.applyMiddleware(checker, logger)
       );
 
       store.subscribe(() => {
