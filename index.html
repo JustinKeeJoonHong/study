@@ -292,6 +292,17 @@
           </div>
         );
       };
+
+      const App = () => {
+        return (
+          <div>
+            <Todos />
+            <Goals />
+          </div>
+        );
+      };
+
+      ReactDOM.render(<App />, document.getElementById("app"));
     </script>
   </body>
 </html>
