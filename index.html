@@ -272,7 +272,13 @@
       const List = (props) => {
         return (
           <ul>
-            <li>List</li>
+            {props.items &&
+              props.items.map((item) => (
+                <li key={item.id}>
+                  <span>{item.name}</span>
+                  <button onClick={}>X</button>
+                </li>
+              ))}
           </ul>
         );
       };
@@ -293,12 +299,18 @@
           );
         };
 
+        const removeItme = todo => {
+            props.store.dispatch(removeTodoAction(
+                todo.id
+            ))
+        }
+
         return (
           <div>
             <h1>Todo List</h1>
             <input type="text" placeholder="Add Todo" ref={inputRef} />
             <button onClick={addItem}>Add Todo</button>
-            <List item={props.todos} />
+            <List items={props.todos} />
           </div>
         );
       };
