@@ -248,7 +248,11 @@
           });
         }, []);
 
-        const { todos, goals } = props.store.getState();
+        const { todos, goals, loading } = props.store.getState();
+
+        if (loading === true) {
+          return <h3> Loading </h3>;
+        }
         return (
           <div>
             <Todos todos={todos} store={props.store} />
