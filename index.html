@@ -25,7 +25,7 @@
       const TOGGLE_TODO = "TOGGLE_TODO";
       const ADD_GOAL = "ADD_GOAL";
       const REMOVE_GOAL = "REMOVE_GOAL";
-      const REMOVE_DATA = "REMOVE_DATA";
+      const RECEIVE_DATA = "RECEIVE_DATA";
 
       function addTodoAction(todo) {
         return {
@@ -227,13 +227,12 @@
         const [value, setValue] = React.useState(0);
 
         React.useEffect(() => {
-          //   Promise.all(
-          //     [API.fetchTodos(), API.fetchGoals()],
-          //     then(([todos, goals]) => {
-          //       console.log("Todos", todos);
-          //       console.log("Goals", goals);
-          //     })
-          //   );
+          Promise.all([API.fetchTodos(), API.fetchGoals()]).then(
+            ([todos, goals]) => {
+              props.store.dispatch(receiveDataAction(todos, goals));
+            }
+          );
+
           props.store.subscribe(() => {
             setValue((value) => value + 1);
           });
