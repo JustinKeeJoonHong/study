@@ -349,18 +349,24 @@
               };
             }, []);
 
-            return () => {};
+            const { dispatch, getState } = props.store;
+            const state = getState();
+            const stateNeeded = mapStateToProps(state);
+
+            return <Component {...stateNeeded} dispatch={dispatch} />;
           };
 
           const ConnectedComponent = () => {
             return (
               <Context.Consumer>
                 {(store) => {
-                  <Receiver store={store} />;
+                  return <Receiver store={store} />;
                 }}
               </Context.Consumer>
             );
           };
+
+          return ConnectedComponent;
         };
       }
 
