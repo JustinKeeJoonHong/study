@@ -310,27 +310,13 @@
         );
       };
 
-      const ConnectedGoals = () => {
-        return (
-          <Context.Consumer>
-            {(store) => {
-              const { goals } = store.getState();
-
-              return <Goals goals={goals} dispatch={store.dispatch} />;
-            }}
-          </Context.Consumer>
-        );
-      };
+      const ConnectedGoals = connect((state) => ({
+        goals: state.goals,
+      }))(Goals);
 
       const App = (props) => {
-        const [value, setValue] = React.useState(0);
-
         React.useEffect(() => {
-          props.store.dispatch(handleInitialData());
-
-          props.store.subscribe(() => {
-            setValue((value) => value + 1);
-          });
+          props.dispatch(handleInitialData());
         }, []);
 
         if (props.loading === true) {
@@ -345,7 +331,7 @@
         );
       };
 
-      const ConnectedApp = connext((state) => ({
+      const ConnectedApp = connect((state) => ({
         loading: state.loading,
       }))(App);
 
