@@ -80,6 +80,18 @@
         };
       }
 
+      function handlerAddGoal(name, cb) {
+        return (dispatch) => {
+          return API.saveGoal(name)
+            .then((goal) => {
+              dispatch(addGoalAction(goal));
+            })
+            .catch(() => {
+              alert("There was an error. Try again.");
+            });
+        };
+      }
+
       function todos(state = [], action) {
         switch (action.type) {
           case ADD_TODO:
