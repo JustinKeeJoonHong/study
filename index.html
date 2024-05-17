@@ -351,7 +351,7 @@
         return (
           <Context.Consumer>
             {(store) => {
-              <App store={store} />;
+              return <App store={store} />;
             }}
           </Context.Consumer>
         );
@@ -369,7 +369,7 @@
 
       ReactDOM.render(
         <Provider store={store}>
-          <App />
+          <ConnectedApp />
         </Provider>,
         document.getElementById("app")
       );
