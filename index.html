@@ -80,7 +80,7 @@
         };
       }
 
-      function handlerAddGoal(name, cb) {
+      function handleAddGoal(name, cb) {
         return (dispatch) => {
           return API.saveGoal(name)
             .then((goal) => {
@@ -95,6 +95,11 @@
       function handleDeleteGoal(goal) {
         return (dispatch) => {
           dispatch(removeGoalAction(goal.id));
+
+          return API.deleteGoal(goal.id).catch(() => {
+            props.store.dispatch(addGoalAction(goal));
+            alert("An error occurred. Try again.");
+          });
         };
       }
 
@@ -244,7 +249,7 @@
           e.preventDefault();
 
           props.store.dispatch(
-            handlerAddGoal(
+            handleAddGoal(
               inputRef.current.value,
               () => (inputRef.current.value = "")
             )
