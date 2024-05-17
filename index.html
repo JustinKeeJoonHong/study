@@ -245,7 +245,7 @@
         const addItem = (e) => {
           e.preventDefault();
 
-          props.store.dispatch(
+          props.dispatch(
             handleAddTodo(
               inputRef.current.value,
               () => (inputRef.current.value = "")
@@ -254,11 +254,11 @@
         };
 
         const removeItem = (todo) => {
-          props.store.dispatch(handleDeleteTodo(todo));
+          props.dispatch(handleDeleteTodo(todo));
         };
 
         const toggleItem = (id) => {
-          props.store.dispatch(handleToggle(id));
+          props.dispatch(handleToggle(id));
         };
 
         return (
@@ -268,6 +268,18 @@
             <button onClick={addItem}>Add Todo</button>
             <List toggle={toggleItem} remove={removeItem} items={props.todos} />
           </div>
+        );
+      };
+
+      const ConnectedTodos = () => {
+        return (
+          <Context.Consumer>
+            {(store) => {
+              const { todos } = store.getState();
+
+              return <Todos todos={todos} dispatch={store.dispatch} />;
+            }}
+          </Context.Consumer>
         );
       };
       const Goals = (props) => {
@@ -321,7 +333,7 @@
           });
         }, []);
 
-        const { todos, loading } = props.store.getState();
+        const { loading } = props.store.getState();
 
         if (loading === true) {
           return <h3> Loading </h3>;
@@ -329,7 +341,7 @@
 
         return (
           <div>
-            <Todos todos={todos} store={props.store} />
+            <ConnectedTodos />
             <ConnectedGoals />
           </div>
         );
