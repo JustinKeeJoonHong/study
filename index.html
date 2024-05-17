@@ -271,17 +271,10 @@
         );
       };
 
-      const ConnectedTodos = () => {
-        return (
-          <Context.Consumer>
-            {(store) => {
-              const { todos } = store.getState();
+      const ConnectedTodos = connect((state) => ({
+        todos: state.todos,
+      }))(Todos);
 
-              return <Todos todos={todos} dispatch={store.dispatch} />;
-            }}
-          </Context.Consumer>
-        );
-      };
       const Goals = (props) => {
         const inputRef = React.useRef();
 
