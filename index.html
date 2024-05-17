@@ -234,14 +234,12 @@
         const addItem = (e) => {
           e.preventDefault();
 
-          return API.saveTodo(inputRef.current.value)
-            .then((todo) => {
-              props.store.dispatch(addTodoAction(todo));
-              inputRef.current.value = "";
-            })
-            .catch(() => {
-              alert("There was an error. Try again.");
-            });
+          props.store.dispatch(
+            handleAddTodo(
+              inputRef.current.value,
+              () => (inputRef.current.value = "")
+            )
+          );
         };
 
         const removeItem = (todo) => {
