@@ -1,4 +1,7 @@
+import React from "react";
 import ReactDOM from "react-dom";
+
+const Context = React.createContext();
 
 const Parent = () => {
   return (
@@ -20,17 +23,25 @@ const Child = () => {
 
 const Grandchild = ({ name }) => {
   return (
-    <div>
-      <h1>Grandchild</h1>
-      <h3>Name : {name}</h3>
-    </div>
+    <Context.Consumer>
+      {(name) => (
+        <div>
+          <h1>Grandchild</h1>
+          <h3>Name : {name}</h3>
+        </div>
+      )}
+    </Context.Consumer>
   );
 };
 
 const App = () => {
   const name = "Andrew";
 
-  return <Parent />;
+  return (
+    <Context.Provider value={name}>
+      <Parent />
+    </Context.Provider>
+  );
 };
 
 ReactDOM.render(<App />, document.getElementById("root"));
