@@ -298,6 +298,18 @@
         );
       };
 
+      const ConnextedGoals = () => {
+        return (
+          <Context.Consumer>
+            {(store) => {
+              const { goals } = store.getState();
+
+              return <Goals goals={goals} />;
+            }}
+          </Context.Consumer>
+        );
+      };
+
       const App = (props) => {
         const [value, setValue] = React.useState(0);
 
