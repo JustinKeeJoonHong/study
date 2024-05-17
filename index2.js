@@ -30,7 +30,7 @@ const Grandchild = ({ name }) => {
 const App = () => {
   const name = "Andrew";
 
-  return <Parent name={name} />;
+  return <Parent />;
 };
 
 ReactDOM.render(<App />, document.getElementById("root"));
