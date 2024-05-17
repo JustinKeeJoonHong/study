@@ -87,7 +87,7 @@
           dispatch(removeTodoAction(todo.id));
 
           return API.deleteTodo(todo.id).catch(() => {
-            props.store.dispatch(addTodoAction(todo));
+            dispatch(addTodoAction(todo));
             alert("An error occured. Try again.");
           });
         };
@@ -125,6 +125,16 @@
             dispatch(addGoalAction(goal));
             alert("An error occurred. Try again.");
           });
+        };
+      }
+
+      function handleInitialData() {
+        return (dispatch) => {
+          Promise.all([API.fetchTodos(), API.fetchGoals()]).then(
+            ([todos, goals]) => {
+              dispatch(receiveDataAction(todos, goals));
+            }
+          );
         };
       }
 
@@ -292,11 +302,7 @@
         const [value, setValue] = React.useState(0);
 
         React.useEffect(() => {
-          Promise.all([API.fetchTodos(), API.fetchGoals()]).then(
-            ([todos, goals]) => {
-              props.store.dispatch(receiveDataAction(todos, goals));
-            }
-          );
+          props.store.dispatch(handleInitialData());
 
           props.store.subscribe(() => {
             setValue((value) => value + 1);
