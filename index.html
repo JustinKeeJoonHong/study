@@ -276,7 +276,7 @@
         const addItem = (e) => {
           e.preventDefault();
 
-          props.store.dispatch(
+          props.dispatch(
             handleAddGoal(
               inputRef.current.value,
               () => (inputRef.current.value = "")
@@ -285,7 +285,7 @@
         };
 
         const removeItem = (goal) => {
-          props.store.dispatch(handleDeleteGoal(goal));
+          props.dispatch(handleDeleteGoal(goal));
         };
 
         return (
@@ -321,7 +321,7 @@
           });
         }, []);
 
-        const { todos, goals, loading } = props.store.getState();
+        const { todos, loading } = props.store.getState();
 
         if (loading === true) {
           return <h3> Loading </h3>;
@@ -330,7 +330,7 @@
         return (
           <div>
             <Todos todos={todos} store={props.store} />
-            <Goals goals={goals} store={props.store} />
+            <ConnectedGoals />
           </div>
         );
       };
