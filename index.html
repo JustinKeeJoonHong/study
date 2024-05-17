@@ -109,6 +109,7 @@
           return API.saveGoal(name)
             .then((goal) => {
               dispatch(addGoalAction(goal));
+              cb();
             })
             .catch(() => {
               alert("There was an error. Try again.");
